@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  sqlalchemy_helpers:
+    build: .
+    image: lycantropos/sqlalchemy_helpers:latest
+    volumes:
+      - .:/sqlalchemy_helpers/
+    extra_hosts:
+      - "dockerhost:$DOCKERHOST"  # for debugging
