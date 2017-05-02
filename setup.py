@@ -8,4 +8,5 @@ setup(name='sqlalchemy_helpers',
       url='https://github.com/lycantropos/sqlalchemy_helpers',
       download_url='https://github.com/lycantropos/sqlalchemy_helpers/archive/'
                    'master.tar.gz',
-      keywords=['SQLAlchemy'])
+      keywords=['SQLAlchemy'],
+      install_requires=['sqlalchemy>=1.1.6'])
