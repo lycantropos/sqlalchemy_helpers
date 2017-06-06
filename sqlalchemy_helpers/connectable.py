@@ -14,6 +14,8 @@ from sqlalchemy.orm import (Session,
 
 DbUriType = Union[str, URL]
 
+logger = logging.getLogger('sqlalchemy_helpers')
+
 
 @contextmanager
 def get_engine(db_uri: DbUriType,
@@ -66,7 +68,7 @@ def check_connection(db_uri: DbUriType,
                      retry_interval: int = 2
                      ) -> None:
     db_uri_str = db_uri_to_str(db_uri)
-    logging.info('Establishing connection '
+    logger.info('Establishing connection '
                  f'with "{db_uri_str}".')
     with get_engine(db_uri) as engine:
         for attempt_num in range(retry_attempts):
@@ -77,7 +79,7 @@ def check_connection(db_uri: DbUriType,
             except OperationalError:
                 err_msg = ('Connection attempt '
                            f'#{attempt_num + 1} failed.')
-                logging.error(err_msg)
+                logger.error(err_msg)
                 time.sleep(retry_interval)
         else:
             err_message = ('Failed to establish connection '
@@ -86,7 +88,7 @@ def check_connection(db_uri: DbUriType,
                            f'with {retry_interval} s. interval.')
             raise ConnectionError(err_message)
 
-    logging.info(f'Connection established with "{db_uri_str}".')
+    logger.info(f'Connection established with "{db_uri_str}".')
 
 
 def db_uri_to_str(db_uri: DbUriType) -> str:
