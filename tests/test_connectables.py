@@ -40,6 +40,9 @@ def test_open_connection(engine: Engine,
     assert is_context_manager(context_manager)
     assert result == statement_result
 
+    with pytest.raises(sqlalchemy.exc.StatementError):
+        connection.scalar(statement)
+
 
 def test_open_session(engine: Engine,
                       statement: ClauseElement,
