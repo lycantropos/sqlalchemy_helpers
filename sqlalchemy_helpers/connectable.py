@@ -69,26 +69,32 @@ def check_connection(db_uri: DbUriType,
                      retry_interval: int = 2) -> None:
     db_uri_str = db_uri_to_str(db_uri)
     logger.info('Establishing connection '
-                f'with "{db_uri_str}".')
+                'with "{db_uri_str}".'
+                .format(db_uri_str=db_uri_str))
     with create_engine(db_uri) as engine:
-        for attempt_num in range(retry_attempts):
+        for attempt_index in range(1, retry_attempts + 1):
             try:
                 connection = engine.connect()
                 connection.close()
                 break
             except OperationalError:
                 err_msg = ('Connection attempt '
-                           f'#{attempt_num + 1} failed.')
+                           '#{attempt_index} failed.'
+                           .format(attempt_index=attempt_index))
                 logger.error(err_msg)
                 time.sleep(retry_interval)
         else:
             err_message = ('Failed to establish connection '
-                           f'with "{db_uri_str}" '
-                           f'after {retry_attempts} attempts '
-                           f'with {retry_interval} s. interval.')
+                           'with "{db_uri_str}" '
+                           'after {retry_attempts} attempts '
+                           'with {retry_interval} s. interval.'
+                           .format(db_uri_str=db_uri_str,
+                                   retry_attempts=retry_attempts,
+                                   retry_interval=retry_interval))
             raise ConnectionError(err_message)
 
-    logger.info(f'Connection established with "{db_uri_str}".')
+    logger.info('Connection established with "{db_uri_str}".'
+                .format(db_uri_str=db_uri_str))
 
 
 def db_uri_to_str(db_uri: DbUriType) -> str:
