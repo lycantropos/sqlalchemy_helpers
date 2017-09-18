@@ -30,6 +30,26 @@ Download and install the latest version from ``GitHub`` repository
   cd hypothesis_sqlalchemy
   python3 setup.py install
 
+Usage
+-----
+Assuming that ``POSTGRES_URI`` environment variable is set
+and corresponds to the working database instance:
+
+>>> import os
+>>> from sqlalchemy.engine.url import make_url
+>>> postgres_uri = make_url(os.environ['POSTGRES_URI'])
+>>> from sqlalchemy_helpers.connectable import check_connection
+>>> check_connection(postgres_uri)
+>>> from sqlalchemy_helpers.connectable import create_engine
+>>> with create_engine(postgres_uri) as engine:
+...     engine.scalar('SELECT 1')
+1
+>>> from sqlalchemy_helpers.connectable import open_connection
+>>> with create_engine(postgres_uri) as engine:
+...     with open_connection(engine) as connection:
+...         connection.scalar('SELECT 1')
+1
+
 Running tests
 -------------
 Plain
@@ -41,6 +61,7 @@ Plain
     python3 setup.py test
 
 where
+
   - ``$POSTGRES_USERNAME``: PostgreSQL database user name
     (e.g. ``postgres``),
   - ``$POSTGRES_PASSWORD``: PostgreSQL database user password
