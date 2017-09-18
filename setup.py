@@ -35,7 +35,7 @@ setup(name=PROJECT_NAME,
           'pydevd>=1.0.0',  # debugging
           'psycopg2>=2.7.3.1',  # PostgreSQL driver
           'PyMySQL>=0.7.11',  # MySQL driver
-          'sqlalchemy_utils==0.32.16',  # database creation/destruction
+          'sqlalchemy_utils>=0.32.16',  # database creation/destruction
           'pytest>=3.0.5',
           'pytest-cov>=2.4.0',
           'hypothesis>=3.13.0',
