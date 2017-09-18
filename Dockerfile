@@ -1,5 +1,5 @@
 FROM python:3.5
 
-WORKDIR /sqlalchemy_helpers
-COPY . /sqlalchemy_helpers/
+WORKDIR /opt/sqlalchemy_helpers
+COPY . /opt/sqlalchemy_helpers/
 RUN python3 -m pip install .

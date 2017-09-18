@@ -5,7 +5,7 @@ services:
     build: .
     image: lycantropos/sqlalchemy_helpers:latest
     volumes:
-      - .:/sqlalchemy_helpers/
+      - .:/opt/sqlalchemy_helpers/
     environment:
       POSTGRES_URI: postgresql://username:password@postgres/sqlalchemy_helpers
       MYSQL_URI: mysql+pymysql://root:secret@mysql
