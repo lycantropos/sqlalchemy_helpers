@@ -9,7 +9,8 @@ from sqlalchemy.engine import (Connectable,
                                Engine,
                                create_engine as raw_create_engine)
 from sqlalchemy.engine.url import URL
-from sqlalchemy.exc import OperationalError
+from sqlalchemy.exc import (OperationalError,
+                            InternalError)
 from sqlalchemy.orm import (Session,
                             sessionmaker)
 
@@ -77,7 +78,7 @@ def check_connection(db_uri: DbUriType,
                 connection = engine.connect()
                 connection.close()
                 break
-            except OperationalError:
+            except (OperationalError, InternalError):
                 err_msg = ('Connection attempt '
                            '#{attempt_index} failed.'
                            .format(attempt_index=attempt_index))
