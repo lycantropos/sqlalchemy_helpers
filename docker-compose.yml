@@ -8,7 +8,7 @@ services:
       - .:/opt/sqlalchemy_helpers/
     environment:
       POSTGRES_URI: postgresql://username:password@postgres/sqlalchemy_helpers
-      MYSQL_URI: mysql+pymysql://root:secret@mysql
+      MYSQL_URI: mysql+pymysql://root:secret@mysql/sqlalchemy_helpers
     extra_hosts:
       - "dockerhost:$DOCKERHOST"  # for debugging
     entrypoint: python3
@@ -17,11 +17,12 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      - POSTGRES_DB=sqlalchemy_helpers
-      - POSTGRES_USER=username
-      - POSTGRES_PASSWORD=password
+      POSTGRES_DB: sqlalchemy_helpers
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
 
   mysql:
     image: mysql:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=secret
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: sqlalchemy_helpers
