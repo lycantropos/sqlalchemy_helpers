@@ -18,7 +18,7 @@ Download and install the latest stable version from ``PyPI`` repository
 
 .. code-block:: bash
 
-  python3 -m pip install --upgrade hypothesis_sqlalchemy
+  python3 -m pip install --upgrade sqlalchemy_helpers
 
 Developer
 ~~~~~~~~~
@@ -26,8 +26,8 @@ Download and install the latest version from ``GitHub`` repository
 
 .. code-block:: bash
 
-  git clone https://github.com/lycantropos/hypothesis_sqlalchemy.git
-  cd hypothesis_sqlalchemy
+  git clone https://github.com/lycantropos/sqlalchemy_helpers.git
+  cd sqlalchemy_helpers
   python3 setup.py install
 
 Usage
